@@ -1,0 +1,38 @@
+<app-dashboard-header></app-dashboard-header>
+<div class="dashboard">
+  <div class="form-container">
+    <h2>Teacher Dashboard</h2>
+    <form (ngSubmit)="onSubmit()" [formGroup]="registrationForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" formControlName="name" placeholder="Enter your name">
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email" placeholder="Enter your email">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" formControlName="password" placeholder="Enter your password">
+      </div>
+      <div class="buttons">
+        <!-- Conditionally show either "Submit" or "Update" button -->
+        <button *ngIf="!editingStudent" type="button" (click)="onSubmit()">Submit</button>
+        <button *ngIf="editingStudent" type="button" (click)="updateStudent(editingStudent._id, registrationForm.value)">Update</button>
+      </div>
+    </form>
+  </div>
+  <div class="students">
+    <div class="inner-students" *ngFor="let student  of response" >
+      <h1>Name:{{ student.name }}</h1>
+    <h3>Email:{{ student.email }}</h3>
+    <h3>Password:{{ student.password}}</h3>
+    <div class="buttons">
+      <button class="edit-btn" (click)="edit(student)">Edit</button>
+      <button class="delete-btn" (click)="delete(student._id)">Delete</button>
+     
+    </div>
+    </div>
+    
+  </div>
+</div>
